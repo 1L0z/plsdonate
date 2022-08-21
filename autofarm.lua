@@ -8,8 +8,6 @@ if game.PlaceId ~= 8737602449 then
     return
 end
 
-wait(10)
-
 --Anti-AFK
 local Players = game:GetService("Players")
 local connections = getconnections or get_signal_cons
