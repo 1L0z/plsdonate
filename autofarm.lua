@@ -618,7 +618,7 @@ Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
         local logs = LogService:GetLogHistory()
         --Tries to grabs donation message from logs
         if string.find(logs[#logs].message, Players.LocalPlayer.DisplayName) then
-            webhook(tostring(logs[#logs].message.. " (Total Raised by ".. Players.LocalPlayer.DisplayName ..": " .. Players.LocalPlayer.leaderstats.Raised.value.. "), (Total Earned: " .. TotalRobuxEarned_data .. ")"))
+            webhook(tostring(logs[#logs].message.. " (Total Raised by ".. Players.LocalPlayer.DisplayName ..": " .. Players.LocalPlayer.leaderstats.Raised.value.. "), Total Earned: " .. TotalRobuxEarned_data))
         else
             webhook(tostring("💰 Somebody tipped ".. Players.LocalPlayer.leaderstats.Raised.value - RaisedC.. " Robux to ".. Players.LocalPlayer.DisplayName.. " (Total Raised by ".. Players.LocalPlayer.DisplayName ..": " .. Players.LocalPlayer.leaderstats.Raised.value.. "), (Total Earned: " .. TotalRobuxEarned_data .. ")"))
         end
