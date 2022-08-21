@@ -27,6 +27,14 @@ else
     end)
 end
 
+if not isfile("Curvn_Creations/Pls_Donate/TotalRobuxEarned.txt") then
+    writefile("Curvn_Creations/Pls_Donate/TotalRobuxEarned.txt", "0")
+end
+
+local function round(n)
+	return math.ceil(n - 0.5)
+end
+
 --Variables
 local unclaimed = {}
 local counter = 0
@@ -592,14 +600,27 @@ end
 local RaisedC = Players.LocalPlayer.leaderstats.Raised.value
 Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
     counter = 0
+
+    local TotalRobuxEarned = readfile("Curvn_Creations/Pls_Donate/TotalRobuxEarned.txt")
+    local TotalRobuxEarned_data = TotalRobuxEarned
+    print("Total Robux Earned!: " .. TotalRobuxEarned_data)
+
+    local RaisedNotiNumber = Players.LocalPlayer.leaderstats.Raised.value - RaisedC
+    local PercentageGiven = 0.7
+
+    PercentedRobux = RaisedNotiNumber * PercentageGiven
+    TotalRobuxEarned_data = TotalRobuxEarned + round(PercentedRobux)
+
+    writefile("Curvn_Creations/Pls_Donate/TotalRobuxEarned.txt", tostring(TotalRobuxEarned_data))
+
     if getgenv().settings.webhookToggle and getgenv().settings.webhookBox then
         local LogService = Game:GetService("LogService")
         local logs = LogService:GetLogHistory()
         --Tries to grabs donation message from logs
         if string.find(logs[#logs].message, Players.LocalPlayer.DisplayName) then
-            webhook(tostring(logs[#logs].message.. " (Total: ".. Players.LocalPlayer.leaderstats.Raised.value.. ")"))
+            webhook(tostring(logs[#logs].message.. " (Total Raised [".. Players.LocalPlayer.DisplayName .."]: " .. Players.LocalPlayer.leaderstats.Raised.value.. "), [Total Earned: " .. TotalRobuxEarned_data .. "]"))
         else
-            webhook(tostring("💰 Somebody tipped ".. Players.LocalPlayer.leaderstats.Raised.value - RaisedC.. " Robux to ".. Players.LocalPlayer.DisplayName.. " (Total: " .. Players.LocalPlayer.leaderstats.Raised.value.. ")"))
+            webhook(tostring("💰 Somebody tipped ".. Players.LocalPlayer.leaderstats.Raised.value - RaisedC.. " Robux to ".. Players.LocalPlayer.DisplayName.. " (Total Raised [".. Players.LocalPlayer.Name .."]: " .. Players.LocalPlayer.leaderstats.Raised.value.. "), [Total Earned: " .. TotalRobuxEarned_data .. "]"))
         end
     end
     RaisedC = Players.LocalPlayer.leaderstats.Raised.value
