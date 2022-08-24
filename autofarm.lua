@@ -603,7 +603,6 @@ Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 
     local TotalRobuxEarned = readfile("Curvn_Creations/Pls_Donate/TotalRobuxEarned.txt")
     local TotalRobuxEarned_data = TotalRobuxEarned
-    print("Total Robux Earned!: " .. TotalRobuxEarned_data)
 
     local RaisedNotiNumber = Players.LocalPlayer.leaderstats.Raised.value - RaisedC
     local PercentageGiven = 0.7
@@ -612,6 +611,7 @@ Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
     TotalRobuxEarned_data = TotalRobuxEarned + round(PercentedRobux)
 
     writefile("Curvn_Creations/Pls_Donate/TotalRobuxEarned.txt", tostring(TotalRobuxEarned_data))
+    print("Total Robux Earned!: " .. TotalRobuxEarned_data)
 
     if getgenv().settings.webhookToggle and getgenv().settings.webhookBox then
         local LogService = Game:GetService("LogService")
